@@ -16,6 +16,8 @@ RUN source octavia_disk_image_create/bin/activate
 # Install octavia requirements
 RUN pip3 install -r /root/octavia/diskimage-create/requirements.txt
 
+RUN --security=insecure mknod /dev/loop0 b 7 0
+
 RUN chmod +x /root/octavia/diskimage-create/diskimage-create.sh
 RUN --security=insecure /root/octavia/diskimage-create/diskimage-create.sh -f
 CMD ["/bin/bash", "-l"]
