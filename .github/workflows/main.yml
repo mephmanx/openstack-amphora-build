@@ -14,3 +14,7 @@ jobs:
         name: build image 
         run: |
           bash build.sh
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ~/octavia/diskimage-create/amphora-x64-haproxy.qcow2
