@@ -1,6 +1,11 @@
 name: ci
 
 on:
+  workflow_dispatch:
+    inputs:
+      openstack_version:
+        description: 'Openstack Release Name'
+        required: true
   push:
 
 jobs:
@@ -14,6 +19,8 @@ jobs:
         name: build image 
         run: |
           bash build.sh
+        env:
+          OPENSTACK_VERSION: '${{ github.event.inputs.openstack_version }}'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
