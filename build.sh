@@ -3,7 +3,7 @@
 sudo apt install python3-pip git
 sudo apt install qemu-utils git kpartx debootstrap
 
-git clone https://opendev.org/openstack/octavia -b master ~/octavia
+git clone https://opendev.org/openstack/octavia -b stable/"$OPENSTACK_VERSION" ~/octavia
 
 
 cd ~/octavia/diskimage-create
