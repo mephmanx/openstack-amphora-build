@@ -1,11 +1,6 @@
 name: ci
 
 on:
-  workflow_dispatch:
-    inputs:
-      openstack_version:
-        description: 'Openstack Release Name'
-        required: true
   push:
 
 jobs:
@@ -15,13 +10,16 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
       -
         name: build image 
         run: |
           bash build.sh
         env:
-          OPENSTACK_VERSION: '${{ github.event.inputs.openstack_version }}'
+          OPENSTACK_VERSION: '${{ steps.get_version.outputs.VERSION }}'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: /home/runner/octavia/diskimage-create/amphora-x64-haproxy.qcow2
+          files: /home/runner/octavia/diskimage-create/amphora-x64-haproxy-$VERSION.qcow2
