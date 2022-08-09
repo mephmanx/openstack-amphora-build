@@ -17,4 +17,4 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: home/runner/octavia/diskimage-create/amphora-x64-haproxy.qcow2
+          files: /home/runner/octavia/diskimage-create/amphora-x64-haproxy.qcow2
